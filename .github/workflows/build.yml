@@ -1,0 +1,13 @@
+name: Build VST3
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build build --config Release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CreativeEcho-VST3
+          path: build/CreativeEcho_artefacts/Release/VST3/
